@@ -1,0 +1,13 @@
+package railway.discount_calculation;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DiscountCalculationApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DiscountCalculationApplication.class, args);
+	}
+
+}
