@@ -1,0 +1,92 @@
+@startuml
+
+title 割引
+
+namespace domain {
+    namespace discount {
+        class DiscountNotAppliedFare {
+            Amount
+            GroupDiscountNotAppliedFare applied( Percent )
+        }
+        class BusinessKilometer {}
+        class Group {
+            Children
+            Adults
+        }
+        class DiscountNotAppliedSuperExpressSurcharge {
+            Amount
+            DiscountAppliedSuperExpressSurcharge applied( Percent )
+        }
+        class DiscountApplicationDomainService {
+            {static} DiscountAppliedFare apply(\n  DiscountNotAppliedFare,\n  TripType,\n  BusinessKilometer,\n  Group,\n  DepartureMonthDay\n)
+            {static} DiscountAppliedSuperExpressSurcharge(\n  DiscountNotAppliedSuperExpressSurcharge,\n  Group,\n  DepartureMonthDay\n)
+        }
+        class GroupDiscountTenPercentApplicationTerm {
+            GroupDiscountApplicationStartMonthDay
+            GroupDiscountApplicationEndMonthDay
+            {static} boolean include( DepartureMonthDay )
+        }
+        class GroupDiscountNotAppliedFare {
+            Amount
+            DiscountAppliedFare applied( Percent )
+        }
+        class DiscountAppliedFare {
+            Amount
+        }
+        class DiscountAppliedSuperExpressSurcharge {
+            Amount
+        }
+        class ComplimentaryNumbersCalculationDomainService {
+            {static} ComplimentaryNumbers calculate( Group )
+        }
+        class ComplimentaryNumbers {
+            Children
+            Adults
+        }
+
+        DiscountApplicationDomainService -u-> GroupDiscountTenPercentApplicationTerm
+        DiscountApplicationDomainService -d-> DiscountNotAppliedFare
+        DiscountApplicationDomainService -d-> DiscountNotAppliedSuperExpressSurcharge
+        DiscountApplicationDomainService -u-> BusinessKilometer
+        DiscountApplicationDomainService -u-> Group
+        ComplimentaryNumbersCalculationDomainService -u-> Group
+
+        DiscountNotAppliedFare -d-> GroupDiscountNotAppliedFare: create
+        GroupDiscountNotAppliedFare -d-> DiscountAppliedFare: create
+
+        DiscountNotAppliedSuperExpressSurcharge -d-> DiscountAppliedSuperExpressSurcharge: create
+
+        ComplimentaryNumbersCalculationDomainService -d-> ComplimentaryNumbers
+    }
+
+    namespace common {
+        class Amount {}
+        class Numbers {}
+        class Percent {
+            {static} Percent ten()
+            {static} Percent fifteen()
+            {static} Percent rest()
+        }
+        enum Destination {
+            新大阪
+            姫路
+        }
+        enum TripType {
+            片道
+            往復
+        }
+        class DepartureMonthDay {
+            MonthDay
+        }
+
+        Numbers -[hidden]r- Amount
+        Amount -[hidden]r- DepartureMonthDay
+        DepartureMonthDay -[hidden]r- Percent
+        Percent -[hidden]r- TripType
+        TripType -[hidden]r- Destination
+    }
+
+    domain.discount.DiscountAppliedFare -[hidden]d- domain.common.Numbers
+}
+
+@enduml
