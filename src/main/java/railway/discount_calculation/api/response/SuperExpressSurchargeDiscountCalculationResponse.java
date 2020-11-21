@@ -5,5 +5,5 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public class SuperExpressSurchargeDiscountCalculationResponse {
-  @Getter private final int discountAmountValue;
+  @Getter private final int value;
 }

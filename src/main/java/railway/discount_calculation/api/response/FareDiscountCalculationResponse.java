@@ -5,5 +5,5 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public class FareDiscountCalculationResponse {
-  @Getter private final int discountAmountValue;
+  @Getter private final int value;
 }

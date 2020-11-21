@@ -6,5 +6,5 @@ import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CatalogueResponse {
-  @Getter @Setter private int businessKilometerValue;
+  @Getter @Setter private int value;
 }
