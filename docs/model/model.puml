@@ -2,6 +2,15 @@
 
 title 割引
 
+skinparam package {
+    BackgroundColor d0ead3
+}
+
+skinparam class {
+    BorderColor black
+    BackgroundColor white
+}
+
 namespace domain {
     namespace discount {
         class DiscountNotAppliedFare {
