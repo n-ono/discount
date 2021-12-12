@@ -18,7 +18,7 @@ import static io.vavr.API.$;
 @AllArgsConstructor
 public class CatalogueRepositoryImpl implements CatalogueRepository {
   public static final String URL =
-      "http://catalogue:8080/catalogue/business-kilometer?destination={destination}";
+      "http://catalogue-api.catalogue.internal:8080/catalogue/business-kilometer?destination={destination}";
 
   @Autowired private final RestTemplate restTemplate;
 
